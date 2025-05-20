@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Пайызды тап – Мәтін есеп</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        .problem {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        input,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #1976d2;
+        }
+        
+        #feedback {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Мәтін есеп – Пайыз</h2>
+
+        <div class="problem">
+            <p><strong>2 есеп:</strong> Аружан 600 грамм жаңғақ сатып алды. Ол жаңғақтың 30 пайызын тәтесіне берді. Аружан тәтесіне неше грамм жаңғақ берді?</p>
+        </div>
+
+        <label for="userAnswer">Сенің жауабың:</label>
+        <input type="number" id="userAnswer" placeholder="Жауабыңды граммен жаз">
+
+        <button onclick="checkAnswer()">Тексеру</button>
+
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const userAnswer = parseFloat(document.getElementById("userAnswer").value);
+            const correctAnswer = (30 / 100) * 600;
+
+            if (isNaN(userAnswer)) {
+                document.getElementById("feedback").innerText = "Жауабыңды енгіз!";
+                document.getElementById("feedback").style.color = "red";
+                return;
+            }
+
+            const roundedUser = Math.round(userAnswer * 100) / 100;
+            const roundedCorrect = Math.round(correctAnswer * 100) / 100;
+
+            if (Math.abs(roundedUser - roundedCorrect) < 0.01) {
+                document.getElementById("feedback").innerText = "✅ Дұрыс жауап! Сен өте зерексің!";
+                document.getElementById("feedback").style.color = "green";
+                setTimeout(() => {
+                        // Келесі бетке өту үшін мына жолды өзгертіңіз:
+                        window.location.href = "es3.html";
+                    }, 700);
+            } else {
+                document.getElementById("feedback").innerText = `❌ Бұрыс. Дұрыс жауап: ${correctAnswer} грамм`;
+                document.getElementById("feedback").style.color = "red";
+            }
+        }
+    </script>
+</body>
+
+</html>
